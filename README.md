@@ -198,12 +198,12 @@ To be continued ...
 Articles
 
 - [Bitcoin Script @ Bitcoin Wiki](https://en.bitcoin.it/wiki/Script)
-- [Script - A mini programming language @ Learn me a Bitcoin](http://learnmeabitcoin.com/glossary/script)
+- [Script - A mini programming language @ Learn Me a Bitcoin](http://learnmeabitcoin.com/glossary/script)
 - [Opcodes @ Bitcoin Developer Reference](https://bitcoin.org/en/developer-reference#opcodes)
 
 Books / Series
 
-- [A developer-oriented series about Bitcoin] by Davide De Rosa
+- [A developer-oriented series about Bitcoin](https://davidederosa.com/basic-blockchain-programming/) by Davide De Rosa
   - [The Bitcoin Script language (pt. 1)](https://davidederosa.com/basic-blockchain-programming/bitcoin-script-language-part-one/)
   - [The Bitcoin Script language (pt. 2)](https://davidederosa.com/basic-blockchain-programming/bitcoin-script-language-part-two/)
   - [Standard scripts](https://davidederosa.com/basic-blockchain-programming/standard-scripts/)
