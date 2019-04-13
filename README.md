@@ -198,9 +198,17 @@ To be continued ...
 Articles
 
 - [Bitcoin Script @ Bitcoin Wiki](https://en.bitcoin.it/wiki/Script)
+- [Script - A mini programming language @ Learn me a Bitcoin](http://learnmeabitcoin.com/glossary/script)
+- [Opcodes @ Bitcoin Developer Reference](https://bitcoin.org/en/developer-reference#opcodes)
 
+Books / Series
 
-Books
+- [A developer-oriented series about Bitcoin] by Davide De Rosa
+  - [The Bitcoin Script language (pt. 1)](https://davidederosa.com/basic-blockchain-programming/bitcoin-script-language-part-one/)
+  - [The Bitcoin Script language (pt. 2)](https://davidederosa.com/basic-blockchain-programming/bitcoin-script-language-part-two/)
+  - [Standard scripts](https://davidederosa.com/basic-blockchain-programming/standard-scripts/)
+
+<!-- break -->
 
 - [Programming Bitcoin from Scratch](https://github.com/jimmysong/programmingbitcoin) by Jimmy Song
   - [Chapter 6 - Script](https://github.com/jimmysong/programmingbitcoin/blob/master/ch06.asciidoc) - How Script Works • Example Operations • Parsing the Script Fields • Combining the Script Fields • Standard Scripts • p2pk • Problems with p2pk • Solving the Problems with p2pkh • Scripts Can Be Arbitrarily Constructed • Conclusion
