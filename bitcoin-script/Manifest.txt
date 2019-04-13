@@ -1,0 +1,9 @@
+CHANGELOG.md
+LICENSE.md
+Manifest.txt
+README.md
+Rakefile
+lib/bitcoin-script.rb
+lib/bitcoin-script/version.rb
+test/helper.rb
+test/test_ops.rb
