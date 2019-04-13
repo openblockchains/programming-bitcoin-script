@@ -137,6 +137,42 @@ scriptSig:    OP_2 OP_ADD OP_4 OP_EQUAL
 ```
 
 
+If you check all Bitcoin script operations -
+the following ops should no longer be a mystery:
+
+Constants
+
+|Word | Opcode |Hex | Input | Output | Description|
+|-----|--------|----|-------|--------|------------|
+| OP_0, OP_FALSE |  0  |  0x00 | Nothing. | (empty value) |  An empty array of bytes is pushed onto the stack. (This is not a no-op: an item is added to the stack.) |
+| OP_1, OP_TRUE  | 81  | 0x51  | Nothing. | 1 | The number 1 is pushed onto the stack. |
+| OP_2-OP_16 | 82-96 |  0x52-0x60  | Nothing. |  2-16 |  The number in the word name (2-16) is pushed onto the stack. |
+
+Bitwise logic
+
+|Word | Opcode |Hex | Input | Output | Description|
+|-----|--------|----|-------|--------|------------|
+| OP_EQUAL | 135  | 0x87 | x1 x2  | True / false |  Returns 1 if the inputs are exactly equal, 0 otherwise. |
+
+Arithmetic
+
+|Word | Opcode |Hex | Input | Output | Description|
+|-----|--------|----|-------|--------|------------|
+| OP_ADD |  147  | 0x93  | a b | out  | a is added to b. |
+| OP_MUL |  149  | 0x95  | a b | out  | a is multiplied by b. **disabled.** |
+| OP_DIV |  150  | 0x96  | a b | out  | a is divided by b. **disabled.** |
+
+
+
+Trivia Corner: Did you know? The `OP_MUL` for multiplications (e.g. `2*2`)
+has been banned, that is, disabled!  Why?
+Because of security concerns, that is, fear of stack overflows.
+What about `OP_DIV` for divisions (e.g. `4/2`)?  Don't ask!
+Ask who's protecting you from stack underflows?
+So what's left for programming - not much really :-).
+
+
+
 To be continued ...
 
 
