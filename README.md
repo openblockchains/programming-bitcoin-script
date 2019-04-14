@@ -37,21 +37,70 @@ op_2( stack )     #=> stack = [2,2]
 op_add( stack )   #=> stack = [4]
 ```
 
+(Source: [`stackmachine_add.rb`](stackmachine_add.rb))
+
+
+
 Yes, that's all the magic! You have built your own stack machine with
 two operations / ops, that is, `op_add` and `op_2`.
-
-Push and Pop
 
 The `op_2` operation pushes the number `2` onto the stack.
 The `op_add` operation pops the top two numbers from the stack
 and pushes the result onto the stack.  
 
 
+Aside - What's a Stack? Push 'n' Pop
+
+A stack is a last-in first-out (LIFO) data structure. Use `push`
+to add an element to the top of the stack and use `pop`
+to remove the top element from the stack.
+Example:
+
+``` ruby
+stack = []                   #=> []
+stack.empty?                 #=> true
+
+stack.push( 1 )              #=> [1]
+stack.empty?                 #=> false
+stack.push( 2 )              #=> [1, 2]
+stack.push( 3 )              #=> [1, 2, 3]
+stack.push( "<signature>" )  #=> [1, 2, 3, "<signature>"]
+stack.push( "<pubkey>")      #=> [1, 2, 3, "<signature>", "<pubkey>"]
+
+stack.pop                    #=> "<pubkey>"
+stack                        #=> [1, 2, 3, "<signature>"]
+stack.pop                    #=> "<signature>"
+stack                        #=> [1, 2, 3]
+
+stack.push( 4 )              #=> [1, 2, 3, 4]
+stack.push( 5 )              #=> [1, 2, 3, 4, 5]
+
+stack.pop                    #=> 5
+stack                        #=> [1, 2, 3, 4]
+stack.pop                    #=> 4
+stack                        #=> [1, 2, 3]
+stack.pop                    #=> 3
+stack                        #=> [1, 2]
+stack.pop                    #=> 2
+stack                        #=> [1]
+stack.empty?                 #=> false
+stack.pop                    #=> 1
+stack                        #=> []
+stack.empty?                 #=> true
+stack.pop                    #=> nil
+```
+
+(Source: [`stack.rb`](stack.rb))
+
+
+
+Unlock+Lock / Input+Output / ScriptSig+ScriptPubKey
+
 In "real world" bitcoin the script has two parts / halves in two transactions
 that get combined.
-The "lock" or "output" or "ScriptSig" script
+The "lock" or "output" or "ScriptPubKey" script
 that locks the "unspent transaction output (UTXO)"
-and the "unlock" or "input" or "ScriptPubKey" script that unlocks
+and the "unlock" or "input" or "ScriptSig" script that unlocks
 the bitcoins.
 
 
@@ -70,12 +119,15 @@ end
 ## Let's run!
 
 stack = []
-## scriptPubKey part
-## - Empty
-
-## scriptSig part
+##  I) ScriptSig (input/unlock) part
 op_true( stack )  #=> stack = [1]
+
+## II) ScriptPubKey (output/lock) part
+##     <Empty>
 ```
+
+(Source: [`stackmachine_anyone.rb`](stackmachine_anyone.rb))
+
 
 Bingo! Yes, that's all the magic!
 The `op_true` operation pushes the number `1`, that is, `true` onto the stack.
@@ -83,14 +135,14 @@ The `op_true` operation pushes the number `1`, that is, `true` onto the stack.
 The "official" bitcoin script notation reads:
 
 ```
-scriptPubKey: (empty)
-scriptSig:    OP_TRUE
+ScriptSig (input):    OP_TRUE
+ScriptPubKey:         (empty)
 ```
 
 Now let's split the adding `2+2` script into a two part puzzle,
 that is, `?+2=4`
-or into `scriptSig` and `scriptPubKey`.
- If you know the answer you can "unlock" the bounty,
+or into `ScriptSig` and `ScriptPubKey`.
+If you know the answer you can "unlock" the bounty,
 that is, the bitcoin are yours!
 Here's the challenge:
 
@@ -119,21 +171,26 @@ end
 ## Let's run!
 
 stack = []
-## scriptPubKey part
-## - add your "unlock" stack operation / operations here
+##  I) ScriptSig (input/unlock) part
+##     FIX!!! - add your "unlock" stack operation / operations here
 
-## scriptSig part
+## II) ScriptPubKey (output/lock) part
 op_2( stack )      #=> stack = [?, 2]
 op_add( stack )    #=> stack = [4]
 op_4( stack )      #=> stack = [4,4]
 op_equal( stack )  #=> stack = [1]
 ```
 
+(Source: [`stackmachine_puzzle.rb`](stackmachine_puzzle.rb))
+
+
+
+
 The "official" bitcoin script notation reads:
 
 ```
-scriptPubKey: ?
-scriptSig:    OP_2 OP_ADD OP_4 OP_EQUAL
+ScriptSig (input):    ?
+ScriptPubKey:         OP_2 OP_ADD OP_4 OP_EQUAL
 ```
 
 
@@ -169,11 +226,13 @@ has been banned, that is, disabled!  Why?
 Because of security concerns, that is, fear of stack overflows.
 What about `OP_DIV` for divisions (e.g. `4/2`)?  Don't ask!
 Ask who's protecting you from stack underflows?
-So what's left for programming - not much really :-).
+So what's left for programming - not much really other than checking
+signatures and timelocks :-).
 
 
 
 To be continued ...
+
 
 
 
@@ -187,6 +246,11 @@ To be continued ...
 | p2pk   | Pay-to-pubkey     |
 | p2pkh  | Pay-to-pubkey-hash |
 | p2sh   | Pay-to-script-hash  |
+
+
+
+## Standard Scripts with SegWit (Segregated Witness)
+
 | p2wpkh | Pay-to-witness-pubkey-hash  |
 | p2wsh  | Pay-to-witness-script-hash  |
 
@@ -213,6 +277,7 @@ Books / Series
 - [Programming Bitcoin from Scratch](https://github.com/jimmysong/programmingbitcoin) by Jimmy Song
   - [Chapter 6 - Script](https://github.com/jimmysong/programmingbitcoin/blob/master/ch06.asciidoc) - How Script Works • Example Operations • Parsing the Script Fields • Combining the Script Fields • Standard Scripts • p2pk • Problems with p2pk • Solving the Problems with p2pkh • Scripts Can Be Arbitrarily Constructed • Conclusion
   - [Chapter 8 - Pay-to-Script Hash](https://github.com/jimmysong/programmingbitcoin/blob/master/ch08.asciidoc) - Bare Multisig • Coding OP_CHECKMULTISIG • Problems with Bare Multisig • Pay-to-Script-Hash (p2sh) • Coding p2sh • Conclusion
+  - [Chapter 13 - Segregated Witness](https://github.com/jimmysong/programmingbitcoin/blob/master/ch13.asciidoc) - Pay-to-Witness-Pubkey-Hash (p2wpkh) • p2wpkh Transactions • p2sh-p2wpkh • Coding p2wpkh and p2sh-p2wpkh • Pay-to-Witness-Script-Hash (p2wsh) • p2sh-p2wsh • Coding p2wsh and p2sh-p2wsh • Other Improvements • Conclusion
 
 
 Talk Notes
