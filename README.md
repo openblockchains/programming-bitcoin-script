@@ -422,8 +422,9 @@ def hash160( pubkey )
               ripemd160.unpack( "H*" )[0]    # Convert back to hex
 end
 
-pubkey              =  '02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737'
-hash160( pubkey )  #=> '93ce48570b55c42c2af816aeaba06cfee1224fae'
+pubkey = "02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737"
+hash160( pubkey )  
+#=> "93ce48570b55c42c2af816aeaba06cfee1224fae"
 ```
 
 (Source: [`hash160.rb`](hash160.rb))
