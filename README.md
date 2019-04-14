@@ -452,10 +452,10 @@ Aside - Simplicity - A New Bitcoin Contract Language?
 > Bitcoin's Script language lacks the expressiveness needed
 > for more complex contract scripts.
 >
-> (Source: [Simplicity: High-Assurance Bitcoin Contract Scripting](https://blockstream.com/2018/11/28/en-simplicity-github/) by Russell O'Connor, Andrew Poelstra, Blockstream Resarch, November 2018)
+> (Source: [Simplicity: High-Assurance Bitcoin Contract Scripting](https://blockstream.com/2018/11/28/en-simplicity-github/) by Russell O'Connor, Andrew Poelstra, Blockstream Research, November 2018)
 
 
-> Simplicity in a Nutshell (Abstract)
+> Simplicity: A New Language for Blockchains (Whitepaper Abstract)
 >
 > Simplicity is a typed, combinator-based, functional language without
 > loops and recursion, designed to be used for crypto-currencies
@@ -474,7 +474,7 @@ Aside - Simplicity - A New Bitcoin Contract Language?
 > function, which we believe is enough to build useful contracts for
 > blockchain applications.
 >
-> (Source: [Simplicity: A New Language for Blockchains - Whitepaper (PDF)](https://blockstream.com/simplicity.pdf) by Russell O'Connor, Blockstream, December 2017)
+> (Source: [Simplicity Whitepaper (PDF)](https://blockstream.com/simplicity.pdf) by Russell O'Connor, Blockstream, December 2017)
 
 
 
