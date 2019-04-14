@@ -397,6 +397,74 @@ the curve where x and y are each 256-bit numbers...
 ...
 
 
+
+Aside - What's Hash160?
+
+It's a hash function to hash and shorten public keys. Public keys
+if uncompressed shorten from 65 bytes to 20 bytes
+(or if compressed from 33 bytes). Example:
+
+```
+pubkey          = 02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737
+hash160(pubkey) = 93ce48570b55c42c2af816aeaba06cfee1224fae
+````
+
+To compute the Hash160 run the public key through the SHA256 and RIPEMD160 hash functions.
+Example:
+
+``` ruby
+require 'digest'                           # Hash (Digest) Functions
+
+def hash160( pubkey )
+  binary    = [pubkey].pack( "H*" )       # Convert to binary first before hashing
+  sha256    = Digest::SHA256.digest( binary )
+  ripemd160 = Digest::RMD160.digest( sha256 )
+              ripemd160.unpack( "H*" )[0]    # Convert back to hex
+end
+
+pubkey              =  '02b4632d08485ff1df2db55b9dafd23347d1c47a457072a1e87be26896549a8737'
+hash160( pubkey )  #=> '93ce48570b55c42c2af816aeaba06cfee1224fae'
+```
+
+(Source: [`hash160.rb`](hash160.rb))
+
+
+Security Trivia I: Why use SHA256 and RIPEMD160?
+
+RIPEMD160 gets used because it results in
+a short 160 bit (20 byte) digest BUT is not the strongest hash function on it's own,
+thus, SHA256 gets used for more strength. Best of both world.
+
+Security Trivia II: What's RIPEMD160?
+
+RACE¹ Integrity Primitives Evaluation Message Digest 160-bit
+
+¹: Research and development in Advanced Communications technologies in Europe
+
+``` ruby
+def ripemd160( message )
+  Digest::RMD160.hexdigest( message )
+end
+
+ripemd160( "The quick brown fox jumps over the lazy dog" )
+#=> "37f332f68db77bd9d7edd4969571ad671cf9dd3b"
+
+ripemd160( "The quick brown fox jumps over the lazy cog" )
+#=> "132072df690933835eb8b6ad0b77e7b6f14acad7"
+
+# The hash of a zero-length string is:
+ripemd160( "" )
+#=> "9c1185a5c5e9fc54612808977ee8f548b2258d31"
+```
+
+(Source: [RIPEMD @ Wikipedia](https://en.wikipedia.org/wiki/RIPEMD))  
+
+
+
+...
+
+
+
 The "official" bitcoin script notation reads:
 
 ```
