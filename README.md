@@ -336,6 +336,48 @@ Note: Can you guess where the input / unlock part got its ScriptSig name
 and where the output / lock part got its ScriptPubKey name?
 Yes, from the pay-to-pubkey script.
 
+
+
+Aside - Ivy - Higher-Level Bitcoin Script Language
+
+What's Ivy?  
+
+From the project's readme:
+
+> Ivy is a higher-level language that allows you to write (crypto) contracts
+> for the Bitcoin protocol. Ivy can compile to opcodes for Bitcoin’s stack machine,
+> Bitcoin Script, and can be used to create SegWit-compatible Bitcoin addresses...
+>
+> You can try out Ivy using the [Ivy Playground for Bitcoin](https://ivy-lang.org/bitcoin),
+> which allows you to create test contracts and try spending them,
+> all in a sandboxed environment.
+>
+> (Source: [Ivy Language Documentation](https://docs.ivy-lang.org/bitcoin/))
+
+
+Let's look at the pay-to-pubkey script in Ivy:
+
+```
+contract LockWithPublicKey(publicKey: PublicKey, val: Value) {
+  clause spend(sig: Signature) {
+    verify checkSig(publicKey, sig)
+    unlock val
+  }
+}
+```
+
+And - surprise, surprise - the higher-level script compiles to
+
+```
+<pubKey> OP_CHECKSIG
+```
+
+
+
+
+
+Elliptic Curve Cryptography
+
 So what does a "real world" public key (pubkey) look like?
 In the early days Satoshi Nakamoto
 used the uncompressed SEC (Standards for Efficient Cryptography) format
@@ -343,10 +385,96 @@ for the public key that results
 in 65 raw bytes.
 Bitcoin uses elliptic curve
 cryptography and the public key is a coordinate / point (x,y) on
-the curve where x and y are each 256-bit numbers.
+the curve where x and y are each 256-bit numbers...
+
+
+
+
+
+## p2pkh - Pay-to-pubkey-hash
+
+
+...
+
+
+The "official" bitcoin script notation reads:
+
+```
+ScriptSig (input): <sig> <pubKey>
+ScriptPubKey:      OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
+```
+
+And the Ivy higher-level version reads:
+
+```
+contract LockWithPublicKeyHash(pubKeyHash: Hash160(PublicKey), val: Value) {
+  clause spend(pubKey: PublicKey, sig: Signature) {
+    verify hash160(pubKey) == pubKeyHash
+    verify checkSig(pubKey, sig)
+    unlock val
+  }
+}
+```
+
+that compiles to
+
+```
+OP_DUP OP_HASH160 <pubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
+```
+
 
 
 To be continued ...
+
+
+
+
+
+
+
+
+## Appendix
+
+Aside - Simplicity - A New Bitcoin Contract Language?
+
+> Simplicity is a blockchain programming language
+> designed as an alternative to Bitcoin script.
+>
+> (Source: [Simplicity README](https://github.com/ElementsProject/simplicity))
+
+
+> Why Simplicity?
+>
+> Bitcoin's Script language is generally limited to combinations
+> of digital signature checks, timelocks, and hashlocks.
+> While impressive protocols (such as the Lightning Network)
+> have been built on these primitives,
+> Bitcoin's Script language lacks the expressiveness needed
+> for more complex contract scripts.
+>
+> (Source: [Simplicity: High-Assurance Bitcoin Contract Scripting](https://blockstream.com/2018/11/28/en-simplicity-github/) by Russell O'Connor, Andrew Poelstra, Blockstream Resarch, November 2018)
+
+
+> Simplicity in a Nutshell (Abstract)
+>
+> Simplicity is a typed, combinator-based, functional language without
+> loops and recursion, designed to be used for crypto-currencies
+> and blockchain applications. It aims to improve upon existing crypto-currency languages,
+> such as Bitcoin's Script, Ethereum's Solidity or Michelson's Liquidity,
+> while avoiding some
+> of the problems they face. Simplicity comes with formal denotational
+> semantics defined in Coq, a popular, general purpose software proof assistant.
+> Simplicity also includes operational semantics that are defined
+> with an abstract machine that we call the Bit Machine.
+> The Bit Machine is used as a tool for measuring the computational space and time
+> resources needed to evaluate Simplicity programs. Owing to its Turing
+> incompleteness, Simplicity is amenable to static analysis that can be used
+> to derive upper bounds on the computational resources needed, prior to
+> execution. While Turing incomplete, Simplicity can express any finitary
+> function, which we believe is enough to build useful contracts for
+> blockchain applications.
+>
+> (Source: [Simplicity: A New Language for Blockchains - Whitepaper (PDF)](https://blockstream.com/simplicity.pdf) by Russell O'Connor, Blockstream, December 2017)
 
 
 
