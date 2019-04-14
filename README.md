@@ -319,7 +319,7 @@ Bingo! Yes, that's all the magic!
 The `op_checksig` operation pops two elements from
 the stack, that is, the public key (pubkey)
 and the signature (sig) and
-if the crypto validates the signature (from the input/unlock transaction)
+if the elliptic curve crypto validates the signature (from the input/unlock transaction)
 using the public key (from the the output/lock transaction)
 than the fortune is yours! If not
 the number `0`, that is, `false` gets pushed onto the stack
