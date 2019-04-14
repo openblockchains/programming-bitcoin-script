@@ -231,14 +231,11 @@ signatures and timelocks :-).
 
 
 
-To be continued ...
-
-
-
-
-
-
 ## Standard Scripts
+
+You don't have to start from zero / scratch.
+Bitcoin has many standard script templates.
+The most important include:
 
 
 | Short Name | Long Name  |
@@ -247,12 +244,109 @@ To be continued ...
 | p2pkh  | Pay-to-pubkey-hash |
 | p2sh   | Pay-to-script-hash  |
 
+Standard Scripts with SegWit (Segregated Witness)
 
-
-## Standard Scripts with SegWit (Segregated Witness)
-
+| Short Name | Long Name  |
+|------------|------------|
 | p2wpkh | Pay-to-witness-pubkey-hash  |
 | p2wsh  | Pay-to-witness-script-hash  |
+
+
+
+## p2pk - Pay-to-pubkey
+
+Pay-to-pubkey (p2pk) is the simplest standard script
+and was used in the early days
+including by Satoshi Nakamoto (the pseudonymous Bitcoin founder).
+
+Bitcoin Trivia:
+
+> As initially the sole and subsequently the predominant miner,
+> Nakamoto was awarded bitcoin at genesis and for 10 days afterwards.
+> Except for test transactions these remain unspent since mid January 2009.
+> The public bitcoin transaction log shows that Nakamoto's known addresses contain
+> roughly one million bitcoins. At bitcoin's peak in December 2017,
+> this was worth over US$19 billion,
+> making Nakamoto possibly the 44th richest person in the world at the time.
+>
+> (Source: [Satoshi Nakamoto @ Wikipedia](https://en.wikipedia.org/wiki/Satoshi_Nakamoto))
+
+
+The one million bitcoins are yours if the pay-to-pubkey (p2pk) script
+returns with true, that is, `1` is on top of the stack.
+The only input you need to unlock the the fortune is the signature. Are you Satoshi?
+Let's try:
+
+
+``` ruby
+## Bitcoin crypto helper
+
+class Bitcoin
+  def self.checksig( sig, pubkey )
+    ## "crypto" magic here
+    ##  for testing always return false for now; sorry
+    false
+  end
+end  
+
+
+## A simple stack machine
+
+def op_checksig( stack )
+  pubkey = stack.pop
+  sig    = stack.pop
+  if Bitcoin.checksig( sig, pubkey )
+    stack.push( 1 )
+  else
+    stack.push( 0 )
+  end
+end
+
+## Let's run!
+
+stack = []
+##  I) ScriptSig (input/unlock) part
+stack.push( "<sig>" )   #=> stack = ["<sig>"]
+
+## II) ScriptPubKey (output/lock) part
+stack.push( "<pubkey")  #=> stack = ["<sig>", "<pubkey>" ]
+op_checksig( stack )    #=> stack = [0]
+```
+
+(Source: [`pay-to-pubkey.rb`](pay-to-pubkey.rb))
+
+Bingo! Yes, that's all the magic!
+The `op_checksig` operation pops two elements from
+the stack, that is, the public key (pubkey)
+and the signature (sig) and
+if the crypto validates the signature (from the input/unlock transaction)
+using the public key (from the the output/lock transaction)
+than the fortune is yours! If not
+the number `0`, that is, `false` gets pushed onto the stack
+and you're out of luck. Sorry.
+
+The "official" bitcoin script notation reads:
+
+```
+ScriptSig (input): <sig>
+ScriptPubKey:      <pubKey> OP_CHECKSIG
+```
+
+Note: Can you guess where the input / unlock part got its ScriptSig name
+and where the output / lock part got its ScriptPubKey name?
+Yes, from the pay-to-pubkey script.
+
+So what does a "real world" public key (pubkey) look like?
+In the early days Satoshi Nakamoto
+used the uncompressed SEC (Standards for Efficient Cryptography) format
+for the public key that results
+in 65 raw bytes.
+Bitcoin uses elliptic curve
+cryptography and the public key is a coordinate / point (x,y) on
+the curve where x and y are each 256-bit numbers.
+
+
+To be continued ...
 
 
 
