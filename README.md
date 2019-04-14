@@ -3,6 +3,20 @@
 _Let's start with building your own bitcoin stack machine from zero / scratch and let's run your own bitcoin ops (operations)..._
 
 
+
+**BEWARE: Bitcoin is a gigantic ponzi scheme. Do NOT "invest"
+trying to get-rich-quick HODLing.**
+
+![](i/trolly-ponzi.png)
+
+(Source: [Best of Bitcoin Maximalist - Scammers, Morons, Clowns, Shills & BagHODLers - Inside The New New Crypto Ponzi Economics](https://bitsblocks.github.io/bitcoin-maximalist))
+
+
+
+
+
+## Inside Bitcoin Script
+
 Did you know? Every (yes, every) bitcoin transaction (payment) runs
 a contract script (one half coming from the "output" or "lock" transaction and the
 other half coming from the "input" or "unlock" transaction).
