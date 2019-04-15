@@ -387,9 +387,6 @@ And - surprise, surprise - the higher-level script compiles to
 ```
 
 
-
-
-
 Elliptic Curve Cryptography
 
 So what does a "real world" public key (pubkey) look like?
@@ -398,8 +395,68 @@ used the uncompressed SEC (Standards for Efficient Cryptography) format
 for the public key that results
 in 65 raw bytes.
 Bitcoin uses elliptic curve
-cryptography and the public key is a coordinate / point (x,y) on
-the curve where x and y are each 256-bit numbers...
+cryptography and the public key is a point (x,y) on
+the curve where the x and y coordinates are each 256-bit (32 bytes) numbers.
+
+In the uncompressed format place the x and y coordinate next to each other,
+then prefix with `04` to tell that it is an uncompressed public key:
+
+```
+prefix (1 byte)         : 04
+x-coordinate (32 bytes) : fe53c78e36b86aae8082484a4007b706d5678cabb92d178fc95020d4d8dc41ef
+y-coordinate (32 bytes) : 44cfbb8dfa7a593c7910a5b6f94d079061a7766cbeed73e24ee4f654f1e51904
+    =>
+04fe53c78e36b86aae8082484a4007b706d5678cabb92d178fc95020d4d8dc41ef44cfbb8dfa7a593c7910a5b6f94d079061a7766cbeed73e24ee4f654f1e51904
+```
+
+And in the compressed form because the elliptic curve is symmetrical
+along its x-axis, the trick is that each x-coordinate will
+only ever have one of two possible y coordinates:
+
+- If y is even, it corresponds to one of the points.
+- If y is odd, it corresponds to the other.
+
+Thus, in the compressed public key format place the x coordinate
+along with a prefix (`02` or `03`)
+that tells whether the y is even (`02`) or odd (`03`).
+
+```
+prefix (1 byte)         : 03
+x-coordinate (32 bytes) : df51984d6b8b8b1cc693e239491f77a36c9e9dfe4a486e9972a18e03610a0d22
+     =>
+03df51984d6b8b8b1cc693e239491f77a36c9e9dfe4a486e9972a18e03610a0d22
+````
+
+
+Let's create a public key from the private key
+
+Note: Let's use the 3rd party [Elliptic Curve Digital Signature Algorithm (ECDSA)
+library / gem](https://rubygems.org/gems/ecdsa) by David Grayson.
+
+``` ruby
+require 'pp'
+require 'ecdsa'           # Use an elliptic curve library
+
+# This private key is just an example. It should be much more secure!
+privatekey = 1234
+
+# Elliptic curve multiplication
+group = ECDSA::Group::Secp256k1                          # Select the curve used in Bitcoin
+point = group.generator.multiply_by_scalar( privatekey ) # Multiply by integer (not hex)
+
+# Compressed format (even = 02, odd = 03)
+#   Instead of using both x and y coordinates,
+#   just use the x-coordinate and whether y is even/odd
+prefix = point.y % 2 == 0 ? '02' : '03'
+
+# Add the prefix to the x-coordinate
+#   Convert to hex (and make sure it is 32 bytes / 64 characters in length)
+pubkey = prefix + "%064x" % point.x
+#=> "02e37648435c60dcd181b3d41d50857ba5b5abebe279429aa76558f6653f1658f2"
+```
+
+(Source: [`pubkey.rb`](pubkey.rb))
+
 
 
 
