@@ -630,7 +630,7 @@ Aside - Simplicity - A New Bitcoin Contract Language?
 Articles
 
 - [Bitcoin Script @ Bitcoin Wiki](https://en.bitcoin.it/wiki/Script)
-- [Script - A mini programming language @ Learn Me a Bitcoin](http://learnmeabitcoin.com/glossary/script)
+- [Script - A mini programming language @ Learn Me a Bitcoin](http://learnmeabitcoin.com/glossary/script) by Greg Walker
 - [Opcodes @ Bitcoin Developer Reference](https://bitcoin.org/en/developer-reference#opcodes)
 
 Books / Series
@@ -656,6 +656,10 @@ Talk Notes
     - History Corner - Bitcoin - The World's Worst Database for Everything? - Bitcoin Maximalism in Action
   - Turing Complete and the Halting Problem
     - Fees, Fees, Fees - $$$ - There's No Free Lunch
+
+Code 
+
+- [Learn Me a Bitcoin - Simple code snippets to help you understand how Bitcoin works](https://github.com/in3rsha/learnmeabitcoin-code) by Greg Walker
 
 
 
