@@ -3,13 +3,25 @@
 _Let's start with building your own bitcoin stack machine from zero / scratch and let's run your own bitcoin ops (operations)..._
 
 
+**BEWARE: Bitcoin is a gigantic ponzi scheme¹.
+To the moon!? The new gold standard!? 
+Do NOT "invest" trying to get-rich-quick HODLing. 
+Why not? The bitcoin code is archaic and out-of-date.
+Burn, baby, burn! Proof-of-work / waste is a global
+energy environmental disaster
+using 300kW/h per transaction (!) that's about 179 kilograms of CO² emissions.
+Programmable money (or the internet of value) 
+for all future generations with (bitcoin) script
+without loops and jumps (gotos) and all "stateless"!? LOL.**
 
-**BEWARE: Bitcoin is a gigantic ponzi scheme. Do NOT "invest"
-trying to get-rich-quick HODLing.**
 
-![](i/trolly-ponzi.png)
+¹:  ![](i/trolly-ponzi.png)
 
 (Source: [Best of Bitcoin Maximalist - Scammers, Morons, Clowns, Shills & BagHODLers - Inside The New New Crypto Ponzi Economics](https://bitsblocks.github.io/bitcoin-maximalist))
+
+²: Assuming let's say 0.596 kilograms of CO² per kW/h 
+(that's the energy efficiency in Germany), that's 
+about 179 kilograms of CO² per bitcoin transaction (300 kW/h × 0.596 kg)
 
 
 
