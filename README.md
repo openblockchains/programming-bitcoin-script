@@ -9,7 +9,7 @@ Do NOT "invest" trying to get-rich-quick HODLing.
 Why not? The bitcoin code is archaic and out-of-date.
 Burn, baby, burn! Proof-of-work / waste is a global
 energy environmental disaster
-using 300kW/h per transaction (!) that's about 179 kilograms of CO² emissions.
+using 300kW/h per bitcoin transaction (!) that's about 179 kilograms of CO² emissions.
 Programmable money (or the internet of value) 
 for all future generations with (bitcoin) script
 without loops and jumps (gotos) and all "stateless"!? LOL.**
@@ -20,7 +20,7 @@ without loops and jumps (gotos) and all "stateless"!? LOL.**
 (Source: [Best of Bitcoin Maximalist - Scammers, Morons, Clowns, Shills & BagHODLers - Inside The New New Crypto Ponzi Economics](https://bitsblocks.github.io/bitcoin-maximalist))
 
 ²: Assuming let's say 0.596 kilograms of CO² per kW/h 
-(that's the energy efficiency in Germany), that's 
+(that's the energy efficiency in Germany) that's 
 about 179 kilograms of CO² per bitcoin transaction (300 kW/h × 0.596 kg)
 
 
