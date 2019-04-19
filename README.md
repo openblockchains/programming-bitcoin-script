@@ -125,7 +125,7 @@ Unlock+Lock / Input+Output / ScriptSig+ScriptPubKey
 In "real world" bitcoin the script has two parts / halves in two transactions
 that get combined.
 The "lock" or "output" or "ScriptPubKey" script
-that locks the "unspent transaction output (UTXO)"
+that locks the "unspent transaction output (UTXO)",
 and the "unlock" or "input" or "ScriptSig" script that unlocks
 the bitcoins.
 
@@ -169,7 +169,7 @@ Now let's split the adding `2+2` script into a two part puzzle,
 that is, `?+2=4`
 or into `ScriptSig` and `ScriptPubKey`.
 If you know the answer you can "unlock" the bounty,
-that is, the bitcoin are yours!
+that is, the bitcoins are yours!
 Here's the challenge:
 
 ``` ruby
@@ -347,7 +347,7 @@ the stack, that is, the public key (pubkey)
 and the signature (sig) and
 if the elliptic curve crypto validates the signature (from the input/unlock transaction)
 using the public key (from the the output/lock transaction)
-than the fortune is yours! If not
+then the fortune is yours! If not
 the number `0`, that is, `false` gets pushed onto the stack
 and you're out of luck. Sorry.
 
@@ -408,10 +408,10 @@ for the public key that results
 in 65 raw bytes.
 Bitcoin uses elliptic curve
 cryptography and the public key is a point (x,y) on
-the curve where the x and y coordinates are each 256-bit (32 bytes) numbers.
+the curve where the x and y coordinates are each 256-bit (32 byte) numbers.
 
-In the uncompressed format place the x and y coordinate next to each other,
-then prefix with `04` to tell that it is an uncompressed public key:
+In the uncompressed format, place the x and y coordinate next to each other,
+then prefix with `04` to indicate that it is an uncompressed public key:
 
 ```
 prefix (1 byte)         : 04
