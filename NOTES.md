@@ -1,7 +1,7 @@
 # Bitcoin Script Notes
 
 
-## Taproot
+## Taproot & Tapscript
 
 - [Bitcoin Optech Newsletter #46](https://bitcoinops.org/en/newsletters/2019/05/14/#overview-of-the-taproot--tapscript-proposed-bips), May 14, 2019 - This week's newsletter includes a special section about the recent Taproot proposal...
 
