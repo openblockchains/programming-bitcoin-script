@@ -682,3 +682,9 @@ Code
 The Programming Bitcoin Script Step-by-Step book / guide
 is dedicated to the public domain.
 Use it as you please with no restrictions whatsoever.
+
+
+
+---
+
+For more blockchain books, see the new [**Best of Crypto Books page »**](https://openblockchains.github.io/crypto-books/)
