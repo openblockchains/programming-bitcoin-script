@@ -1,3 +1,9 @@
+
+For more blockchain books, see the [**Best of Crypto Books page »**](https://openblockchains.github.io/crypto-books/)
+
+---
+
+
 # Programming Bitcoin Script Transaction (Crypto) Contracts Step-by-Step
 
 _Let's start with building your own bitcoin stack machine from zero / scratch and let's run your own bitcoin ops (operations)..._
@@ -683,8 +689,3 @@ The Programming Bitcoin Script Step-by-Step book / guide
 is dedicated to the public domain.
 Use it as you please with no restrictions whatsoever.
 
-
-
----
-
-For more blockchain books, see the [**Best of Crypto Books page »**](https://openblockchains.github.io/crypto-books/)
